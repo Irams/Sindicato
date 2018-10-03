@@ -22,7 +22,7 @@ define('DB_NAME', 'sindicato');
 define('DB_USER', 'root');
 
 /** Tu contraseña de MySQL */
-define('DB_PASSWORD', 'soptec098');
+define('DB_PASSWORD', 'maga_098');
 
 /** Host de MySQL (es muy probable que no necesites cambiarlo) */
 define('DB_HOST', 'localhost');
