@@ -1,1 +1,5 @@
+#Conexión a la base de datos
 wp-config.php
+
+#Phpstorm
+.idea/
