@@ -66,7 +66,7 @@ class FrmFieldCaptcha extends FrmFieldType {
 	 * @return string
 	 */
 	protected function before_replace_html_shortcodes( $args, $html ) {
-		return str_replace( ' for="field_[key]"', '', $html );
+		return str_replace( ' for="field_[key]"', ' for="g-recaptcha-response"', $html );
 	}
 
 	public function front_field_input( $args, $shortcode_atts ) {
@@ -91,7 +91,7 @@ class FrmFieldCaptcha extends FrmFieldType {
 	protected function load_field_scripts( $args ) {
 		$api_js_url = $this->api_url();
 
-		wp_register_script( 'recaptcha-api', $api_js_url, array( 'formidable' ), '', true );
+		wp_register_script( 'recaptcha-api', $api_js_url, array( 'formidable' ), '3', true );
 		wp_enqueue_script( 'recaptcha-api' );
 	}
 

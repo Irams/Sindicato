@@ -42,7 +42,7 @@ get_header(); ?>
 
 			<?php endwhile; ?>
 
-			<?php kriesi_pagination(); ?>
+			<?php the_posts_pagination(); ?>
 
 		<?php else : ?>
 

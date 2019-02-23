@@ -53,17 +53,20 @@
                         echo ' <a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</a>.</span>';
                     }?>
     			    <span class="by">
-                        <a href="<?php echo esc_url( 'https://raratheme.com/wordpress-themes/education-zone/' ); ?>" rel="designer"><?php esc_html_e( 'Education Zone ', 'education-zone' ); ?>
+                        <a href="<?php echo esc_url( 'https://raratheme.com/wordpress-themes/education-zone/' ); ?>" rel="designer" target="_blank"><?php esc_html_e( 'Education Zone ', 'education-zone' ); ?>
                         </a>
-                        <?php printf( esc_html__( ' by Rara Theme. Powered by %s', 'education-zone' ), '<a href="'. esc_url( __( 'https://wordpress.org/', 'education-zone' ) ) .'">WordPress</a>' ); ?>.
+                        <?php printf( esc_html__( ' by Rara Theme. Powered by %s', 'education-zone' ), '<a href="'. esc_url( __( 'https://wordpress.org/', 'education-zone' ) ) .'" target="_blank">WordPress</a>' ); ?>.
                     </span>
-                    <?php if ( function_exists( 'the_privacy_policy_link' ) ) {
+                    <?php 
+                        if ( function_exists( 'the_privacy_policy_link' ) ) {
                             the_privacy_policy_link();
-                         } ?>
+                        }
+                    ?>
                 </p>
 			</div><!-- .site-info -->
 		</div>
 	</footer><!-- #colophon -->
+    <div class="footer-overlay"></div>
 </div><!-- #page -->
 
 <?php wp_footer(); ?>

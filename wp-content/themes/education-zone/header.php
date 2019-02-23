@@ -22,12 +22,74 @@
 
 <body <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
     <div id="page" class="site">
+        <?php 
+            $phone      = get_theme_mod( 'education_zone_phone' );
+            $email      = get_theme_mod( 'education_zone_email' );
+            $menu_label = get_theme_mod('education_zone_top_menu_label', __('Quick Links','education-zone'));
+        ?>
+        <div class="mobile-header">
+            <div class="container">
+                <div class="menu-opener">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div> <!-- menu-opener ends -->
+
+                <div class="site-branding">
+                    <?php 
+                        if( function_exists( 'has_custom_logo' ) && has_custom_logo() ){
+                            echo '<div class="img-logo">';
+                            the_custom_logo();
+                            echo '</div><!-- .img-logo -->';
+                        } 
+                    ?>
+                    <div class="text-logo">
+                    <?php
+                        $site_title =  get_bloginfo( 'name', 'display' );
+                        $description = get_bloginfo( 'description', 'display' );
+
+                        if( $site_title ) : ?>
+                            <p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></p>
+                        <?php
+                        endif;
+                    
+                       if ( $description ) : ?>
+                           <p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
+                        <?php
+                       endif; 
+                    ?>
+                    </div>
+                </div> <!-- site-branding ends -->
+            </div> <!-- container ends -->
+
+            <div class="mobile-menu">
+                <?php get_search_form(); ?>
+
+                <nav class="main-navigation" role="navigation">
+                    <?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
+                </nav><!-- #site-navigation -->
+                <?php 
+                    if( has_nav_menu( 'secondary' ) ){ ?>
+                        <nav class="secondary-nav" role="navigation"> 
+                            <?php wp_nav_menu( array( 'theme_location' => 'secondary', 'menu_id' => 'secondary-menu', 'fallback_cb' => false ) ); ?>
+                        </nav><!-- #site-navigation -->
+                    <?php 
+                    }
+
+                    if( $email || $phone ){ ?>
+                       <div class="contact-info">
+                        <?php 
+                            if( $phone ) echo '<a href="tel:'. preg_replace('/\D/', '', $phone) .'" class="tel-link">'. esc_html( $phone ) .'</a>';
+                            if( $email ) echo '<a href="mailto:'. sanitize_email( $email ) .'" class="email-link">'. esc_html( $email ) .'</a>';
+                        ?>
+                        </div> <!-- contact-info ends -->
+                    <?php 
+                    }
+                ?>
+            </div>
+        </div> <!-- mobile-header ends -->
         <header id="masthead" class="site-header" role="banner" itemscope itemtype="http://schema.org/WPHeader">
             <?php 
-            $phone = get_theme_mod( 'education_zone_phone' );
-            $email = get_theme_mod( 'education_zone_email' );
-            $menu_label = get_theme_mod('education_zone_top_menu_label', __('Quick Links','education-zone'));
-
             if( $phone || $email || has_nav_menu( 'secondary' ) ) { ?>
                 <div class="header-top">
                   <div class="container">
@@ -49,11 +111,6 @@
                     <?php 
                     }
                     if( has_nav_menu( 'secondary' ) ){ ?>
-                        
-                        <div id="mobile-header-2">
-                            <a id="responsive-btn" href="#sidr-secondary"><i class="fa fa-bars"></i></a>
-                        </div>
-
                         <nav id="secondary-navigation" class="secondary-nav" role="navigation">     
                             <a href="javascript:void(0);"><?php echo esc_html( $menu_label ); ?></a>                
                             <?php wp_nav_menu( array( 'theme_location' => 'secondary', 'menu_id' => 'secondary-menu', 'fallback_cb' => false ) ); ?>
@@ -96,9 +153,6 @@
             
             <div class="header-bottom">
                 <div class="container">
-                   <div id="mobile-header">
-                        <a id="responsive-menu-button" href="#sidr-main"><i class="fa fa-bars"></i></a>
-                    </div>
                     <nav id="site-navigation" class="main-navigation" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">                        
                         <?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
                     </nav><!-- #site-navigation -->

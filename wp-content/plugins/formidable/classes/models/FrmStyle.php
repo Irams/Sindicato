@@ -133,14 +133,16 @@ class FrmStyle {
 
 		$css = $this->get_css_content( $filename );
 
-		$create_file = new FrmCreateFile( array(
-			'file_name'     => FrmStylesController::get_file_name(),
-			'new_file_path' => FrmAppHelper::plugin_path() . '/css',
-		) );
+		$create_file = new FrmCreateFile(
+			array(
+				'file_name'     => FrmStylesController::get_file_name(),
+				'new_file_path' => FrmAppHelper::plugin_path() . '/css',
+			)
+		);
 		$create_file->create_file( $css );
 
 		update_option( 'frmpro_css', $css, 'no' );
-		set_transient( 'frmpro_css', $css );
+		set_transient( 'frmpro_css', $css, MONTH_IN_SECONDS );
 	}
 
 	private function get_css_content( $filename ) {
@@ -312,7 +314,7 @@ class FrmStyle {
 	}
 
 	public function get_defaults() {
-		return apply_filters( 'frm_default_style_settings', array(
+		$defaults = array(
             'theme_css'         => 'ui-lightness',
             'theme_name'        => 'UI Lightness',
 
@@ -445,7 +447,8 @@ class FrmStyle {
 			'progress_size'         => '30px',
 
             'custom_css'        => '',
-		) );
+		);
+		return apply_filters( 'frm_default_style_settings', $defaults );
     }
 
 	public function get_field_name( $field_name, $post_field = 'post_content' ) {

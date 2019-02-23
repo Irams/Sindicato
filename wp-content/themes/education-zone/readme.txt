@@ -4,15 +4,15 @@ Author: Rara Theme (http://raratheme.com)
 Tags: blog, two-columns, right-sidebar, footer-widgets, custom-background, custom-menu, featured-images, threaded-comments, translation-ready, full-width-template, education, theme-options, custom-logo, e-commerce, one-column, post-formats
 
 Requires at least: 4.5
-Tested up to: 4.9.6
-Stable tag: 1.1.6
+Tested up to: 5.0.3
+Stable tag: 1.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 
 == Description ==
 
-Education Zone is a free clean, beautiful and professional looking WordPress Theme specially designed for Education Institutions. This theme is best suited for college, school, university,  LMS, Training Center,  Academy, Primary School, High school and Kindergarten and other educational websites. The theme is very flexible and versatile can be used to build various types of business and corporate websites. The theme is highly customizable with various features and personalization options. Education Zone comes with several features to make a user-friendly, interactive and visually stunning website. Such features include custom menu, attractive banner, Stat counter, Courses section, testimonial section, Banner with Call to Action Button (CTA), and social media. The theme is SEO friendly with optimized codes, which make it easy for your site to rank on Google and other search engines. The theme is rigorously tested and optimized for speed and faster page load time and has a secure and clean code. The theme is also translation ready. Designed with visitor engagement in mind, Education Zone helps you to easily and intuitively create professional and appealing websites. If your school, college or university needs an online home that is dynamic and multi-functional, this theme is a good place to start. Check the demo at http://raratheme.com/preview/education-zone/, documentation at http://raratheme.com/documentation/education-zone/, and get support at http://raratheme.com/support-ticket/.
+Education Zone is a free clean, beautiful and professional looking WordPress Theme specially designed for Education Institutions. This theme is best suited for college, school, university,  LMS, Training Center,  Academy, Primary School, High school and Kindergarten and other educational websites. The theme is very flexible and versatile can be used to build various types of business and corporate websites. The theme is highly customizable with various features and personalization options. Education Zone comes with several features to make a user-friendly, interactive and visually stunning website. Such features include custom menu, attractive banner, Stat counter, Courses section, testimonial section, Banner with Call to Action Button (CTA), and social media. The theme is SEO friendly with optimized codes, which make it easy for your site to rank on Google and other search engines. The theme is rigorously tested and optimized for speed and faster page load time and has a secure and clean code. The theme is also translation ready. Designed with visitor engagement in mind, Education Zone helps you to easily and intuitively create professional and appealing websites. If your school, college or university needs an online home that is dynamic and multi-functional, this theme is a good place to start. Check the demo at https://demo.raratheme.com/education-zone/, documentation at http://raratheme.com/documentation/education-zone/, and get support at http://raratheme.com/support-ticket/.
 
 
 == Installation ==
@@ -87,6 +87,13 @@ Education Zone WordPress Theme is distributed under the terms of the GPLv2 or la
    
    
 == Changelog ==
+
+    1.1.7
+    * Updated responsive header menu.
+    * Updated font-awesome to version 5.6.3.
+    * Updated demo link.
+    * Added Rara One Click Demo Import in TGMPA.
+
     1.1.6
     * Replaced lightslider, slick with owl-carousel for slider
     * Added minified files for all js and css

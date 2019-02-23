@@ -32,7 +32,7 @@ get_header();
 		if( $square_slider_image ){
 		?>
 		<div class="sq-slide sq-slide-count<?php echo $i; // WPCS: XSS OK. ?>">
-			<img src="<?php echo esc_url( $square_slider_image ); ?>">
+			<img src="<?php echo esc_url( $square_slider_image ); ?>" alt="<?php esc_attr_e('Slider', 'square') ?>">
 			
 			<?php if( $square_slider_title || $square_slider_subtitle){ ?>
 				<div class="sq-slide-caption">
@@ -50,7 +50,7 @@ get_header();
 		}
 	} ?>
 	</div>
-	<div class="sq-banner-shadow"><img src="<?php echo get_template_directory_uri() // WPCS: XSS OK. ?>/images/banner-shadow.png"></div>
+	<div class="sq-banner-shadow"><img src="<?php echo get_template_directory_uri() // WPCS: XSS OK. ?>/images/banner-shadow.png" alt="<?php esc_attr_e('Banner Shadow', 'square'); ?>"></div>
 </section>
 
 <section id="sq-featured-post-section" class="sq-section">
@@ -134,8 +134,10 @@ $square_about_sec_class = !$square_about_image_stack ? 'sq-about-fullwidth' : ""
 
 				foreach ($square_about_image_stack as $square_about_image_stack_single) {
 					$image = wp_get_attachment_image_src( $square_about_image_stack_single, 'square-about-thumb');
+					$image_alt = get_post_meta( $square_about_image_stack_single, '_wp_attachment_image_alt', true);
+					$image_alt_text = $image_alt ? $image_alt : __('About Us Gallery', 'square');
 					?>
-					<li><img src="<?php echo esc_url( $image[0] ); ?>"></li>
+					<li><img src="<?php echo esc_url( $image[0] ); ?>" alt="<?php echo esc_html($image_alt_text) ?>"></li>
 					<?php
 				}
 			?>
@@ -224,8 +226,10 @@ if(!$square_disable_logo_sec){
 		<?php
 		foreach ($square_client_logo_image as $square_client_logo_image_single) {
 			$image = wp_get_attachment_image_src( $square_client_logo_image_single, 'full');
+			$image_alt = get_post_meta( $square_client_logo_image_single, '_wp_attachment_image_alt', true);
+			$image_alt_text = $image_alt ? $image_alt : __('Logo', 'square');
 			?>
-			<img src="<?php echo esc_url( $image[0] ); ?>">
+			<img src="<?php echo esc_url( $image[0] ); ?>" alt="<?php echo esc_html($image_alt_text) ?>">
 			<?php
 		}
 		?>

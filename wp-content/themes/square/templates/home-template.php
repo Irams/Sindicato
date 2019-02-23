@@ -11,8 +11,8 @@ get_header(); ?>
 	<div id="sq-bx-slider">
 	<?php for ($i=1; $i < 4; $i++) {  
 		if($i == 1){
-			$square_slider_title = get_theme_mod('square_slider_title1', esc_html__('Free WordPress Themes', 'square'));
-			$square_slider_subtitle = get_theme_mod('square_slider_subtitle1', esc_html__('Create website in no time', 'square'));
+			$square_slider_title = get_theme_mod('square_slider_title1', __('Free WordPress Themes', 'square'));
+			$square_slider_subtitle = get_theme_mod('square_slider_subtitle1', __('Create website in no time', 'square'));
 			$square_slider_image = get_theme_mod('square_slider_image1', get_template_directory_uri().'/images/bg.jpg');
 		}else{
 			$square_slider_title = get_theme_mod('square_slider_title'.$i);
@@ -23,7 +23,7 @@ get_header(); ?>
 		if( $square_slider_image ){
 		?>
 		<div class="sq-slide sq-slide-count<?php echo $i; // WPCS: XSS OK. ?>">
-			<img src="<?php echo esc_url( $square_slider_image ); ?>">
+			<img src="<?php echo esc_url( $square_slider_image ); ?>" alt="<?php esc_attr_e('Slider', 'square') ?>">
 			
 			<?php if( $square_slider_title || $square_slider_subtitle){ ?>
 				<div class="sq-slide-caption">
@@ -41,7 +41,7 @@ get_header(); ?>
 		}
 	} ?>
 	</div>
-	<div class="sq-banner-shadow"><img src="<?php echo get_template_directory_uri() ?>/images/banner-shadow.png"></div>
+	<div class="sq-banner-shadow"><img src="<?php echo get_template_directory_uri() // WPCS: XSS OK. ?>/images/banner-shadow.png" alt="<?php esc_attr_e('Banner Shadow', 'square'); ?>"></div>
 </section>
 
 <section id="sq-featured-post-section" class="sq-section">
@@ -59,15 +59,15 @@ get_header(); ?>
 				if($query->have_posts()):
 					while($query->have_posts()) : $query->the_post();
 				?>
-					<div class="sq-featured-post <?php echo 'sq-featured-post'.$i;  // WPCS: XSS OK. ?>">
+					<div class="sq-featured-post <?php echo 'sq-featured-post'.$i // WPCS: XSS OK.; ?>">
 						<div class="sq-featured-icon"><i class="fa <?php echo esc_attr( $square_featured_page_icon ); ?>"></i></div>
 						<h4><?php the_title(); ?></h4>
 						<div class="sq-featured-excerpt">
 						<?php 
 						if(has_excerpt()){
-							echo get_the_excerpt();  // WPCS: XSS OK.
+							echo get_the_excerpt(); // WPCS: XSS OK.
 						}else{
-							echo square_excerpt( get_the_content(), 120);  // WPCS: XSS OK.
+							echo square_excerpt( get_the_content(), 120); // WPCS: XSS OK.
 						}?>
 						</div>
 						<?php 
@@ -116,19 +116,19 @@ $square_about_sec_class = !$square_about_image_stack ? 'sq-about-fullwidth' : ""
 		</div>
 
 		<?php 
-		$square_about_image_stack = get_theme_mod('square_about_image_stack');
 		if($square_about_image_stack){
 		?>
 		<div class="sq-image-stack">
 			<ul id="sq-elasticstack" class="sq-elasticstack">
 			<?php 
-				
 				$square_about_image_stack = explode(',', $square_about_image_stack);
 
 				foreach ($square_about_image_stack as $square_about_image_stack_single) {
 					$image = wp_get_attachment_image_src( $square_about_image_stack_single, 'square-about-thumb');
+					$image_alt = get_post_meta( $square_about_image_stack_single, '_wp_attachment_image_alt', true);
+					$image_alt_text = $image_alt ? $image_alt : __('About Us Gallery', 'square');
 					?>
-					<li><img src="<?php echo esc_url( $image[0] ); ?>"></li>
+					<li><img src="<?php echo esc_url( $image[0] ); ?>" alt="<?php echo esc_html($image_alt_text) ?>"></li>
 					<?php
 				}
 			?>
@@ -137,7 +137,7 @@ $square_about_sec_class = !$square_about_image_stack ? 'sq-about-fullwidth' : ""
 		<?php } ?>
 	</div>
 </section>
-<?php }
+<?php } 
 
 $square_disable_tab_sec = get_theme_mod('square_disable_tab_sec');
 if(!$square_disable_tab_sec){
@@ -152,7 +152,7 @@ if(!$square_disable_tab_sec){
 					
 					if($square_tab_title){
 					?>
-					<li class="sq-tab-list<?php echo $i; // WPCS: XSS OK.?>">
+					<li class="sq-tab-list<?php echo $i; // WPCS: XSS OK. ?>">
 					<a href="#<?php echo 'sq-tab'.$i; // WPCS: XSS OK.?>">
 					<?php echo '<i class="fa '.esc_attr( $square_tab_icon ).'"></i><span>'.esc_html( $square_tab_title ) .'</span>'; ?>
 					</a>
@@ -193,7 +193,7 @@ if(!$square_disable_tab_sec){
 		</div>
 	</div>
 </section>
-<?php } 
+<?php }
 
 $square_disable_logo_sec = get_theme_mod('square_disable_logo_sec');
 if(!$square_disable_logo_sec){
@@ -217,8 +217,10 @@ if(!$square_disable_logo_sec){
 		<?php
 		foreach ($square_client_logo_image as $square_client_logo_image_single) {
 			$image = wp_get_attachment_image_src( $square_client_logo_image_single, 'full');
+			$image_alt = get_post_meta( $square_client_logo_image_single, '_wp_attachment_image_alt', true);
+			$image_alt_text = $image_alt ? $image_alt : __('Logo', 'square');
 			?>
-			<img src="<?php echo esc_url( $image[0] ); ?>">
+			<img src="<?php echo esc_url( $image[0] ); ?>" alt="<?php echo esc_html($image_alt_text) ?>">
 			<?php
 		}
 		?>

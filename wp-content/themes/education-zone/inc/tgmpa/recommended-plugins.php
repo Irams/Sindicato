@@ -53,6 +53,11 @@ function education_zone_register_plugins() {
 			'slug'      => 'contact-form-7',
 			'required'  => false,
 		),
+		array(
+            'name'     => 'Rara One Click Demo Import', 
+            'slug'     => 'rara-one-click-demo-import',
+            'required' => false,
+        ),
         
 	);
 

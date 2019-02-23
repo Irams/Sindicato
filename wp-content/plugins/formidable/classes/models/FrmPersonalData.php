@@ -35,7 +35,7 @@ class FrmPersonalData {
 	 */
 	public function register_data_eraser( $erasers ) {
 		$erasers['formidable-eraser'] = array(
-			'eraser_friendly_name' => __( 'Formidable Forms entries' ),
+			'eraser_friendly_name' => __( 'Formidable Forms entries', 'formidable' ),
 			'callback'             => array( $this, 'erase_data' ),
 		);
 
@@ -154,10 +154,12 @@ class FrmPersonalData {
 
 			$entry_data[] = array(
 				'name'  => $field->name,
-				'value' => FrmFieldsHelper::get_unfiltered_display_value( array(
-					'field' => $field,
-					'value' => $meta,
-				) ),
+				'value' => FrmFieldsHelper::get_unfiltered_display_value(
+					array(
+						'field' => $field,
+						'value' => $meta,
+					)
+				),
 			);
 		}
 

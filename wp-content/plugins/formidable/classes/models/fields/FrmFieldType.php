@@ -19,6 +19,7 @@ abstract class FrmFieldType {
 
 	/**
 	 * Does the html for this field label need to include "for"?
+	 *
 	 * @var bool
 	 * @since 3.0
 	 */
@@ -26,6 +27,7 @@ abstract class FrmFieldType {
 
 	/**
 	 * Does the field include a input box to type into?
+	 *
 	 * @var bool
 	 * @since 3.0
 	 */
@@ -33,6 +35,7 @@ abstract class FrmFieldType {
 
 	/**
 	 * Is the HTML customizable?
+	 *
 	 * @var bool
 	 * @since 3.0
 	 */
@@ -40,6 +43,7 @@ abstract class FrmFieldType {
 
 	/**
 	 * Could this field hold email values?
+	 *
 	 * @var bool
 	 * @since 3.0
 	 */
@@ -47,6 +51,7 @@ abstract class FrmFieldType {
 
 	/**
 	 * Does this field show on the page?
+	 *
 	 * @var bool
 	 * @since 3.0
 	 */
@@ -54,6 +59,7 @@ abstract class FrmFieldType {
 
 	/**
 	 * Is this field a lot taller than the submit button?
+	 *
 	 * @var bool
 	 * @since 3.0
 	 */
@@ -132,13 +138,14 @@ abstract class FrmFieldType {
 		}
 
 		$input = $this->input_html();
-		$for = $this->for_label_html();
+		$for   = $this->for_label_html();
+		$label = $this->primary_label_element();
 
 		$default_html = <<<DEFAULT_HTML
 <div id="frm_field_[id]_container" class="frm_form_field form-field [required_class][error_class]">
-    <label $for class="frm_primary_label">[field_name]
+    <$label $for id="field_[key]_label" class="frm_primary_label">[field_name]
         <span class="frm_required">[required_label]</span>
-    </label>
+    </$label>
     $input
     [if description]<div class="frm_description" id="frm_desc_field_[key]">[description]</div>[/if description]
     [if error]<div class="frm_error">[error]</div>[/if error]
@@ -153,10 +160,14 @@ DEFAULT_HTML;
 	}
 
 	protected function multiple_input_html() {
-		return '<div class="frm_opt_container">[input]</div>';
+		return '<div class="frm_opt_container" aria-labelledby="field_[key]_label" role="group">[input]</div>';
 	}
 
-	private function for_label_html() {
+	protected function primary_label_element() {
+		return $this->has_for_label ? 'label' : 'div';
+	}
+
+	protected function for_label_html() {
 		if ( $this->has_for_label ) {
 			$for = 'for="field_[key]"';
 		} else {
@@ -265,6 +276,24 @@ DEFAULT_HTML;
 		);
 	}
 
+	/**
+	 * Get a list of all field settings that should be translated
+	 * on a multilingual site.
+	 *
+	 * @since 3.06.01
+	 */
+	public function translatable_strings() {
+		return array(
+			'name',
+			'description',
+			'default_value',
+			'required_indicator',
+			'invalid',
+			'blank',
+			'unique_msg',
+		);
+	}
+
 	public function form_builder_classes( $display_type ) {
 		$classes = 'form-field edit_form_item frm_field_box frm_top_container frm_not_divider edit_field_type_' . $display_type;
 		return $this->alter_builder_classes( $classes );
@@ -362,10 +391,11 @@ DEFAULT_HTML;
 		$field_opts = $this->extra_field_opts();
 		$opts = array_merge( $opts, $field_opts );
 
-		return apply_filters( 'frm_default_field_options', $opts, array(
+		$filter_args = array(
 			'field' => $this->field,
 			'type'  => $this->type,
-		) );
+		);
+		return apply_filters( 'frm_default_field_options', $opts, $filter_args );
 	}
 
 	protected function extra_field_opts() {
@@ -381,7 +411,20 @@ DEFAULT_HTML;
 	 * @return array
 	 */
 	public function prepare_front_field( $values, $atts ) {
+		$values['value'] = $this->prepare_field_value( $values['value'], $atts );
 		return $values;
+	}
+
+	/**
+	 * @since 3.03.03
+	 *
+	 * @param mixed $value
+	 * @param array $atts
+	 *
+	 * @return mixed
+	 */
+	public function prepare_field_value( $value, $atts ) {
+		return $value;
 	}
 
 	/**
@@ -743,6 +786,7 @@ DEFAULT_HTML;
 
 	/**
 	 * Link input to field description for screen readers
+	 *
 	 * @since 3.0
 	 */
 	protected function add_aria_description( $args, &$input_html ) {

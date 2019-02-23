@@ -4,7 +4,7 @@ Theme URI: https://hashthemes.com/wordpress-theme/square/
 Author: HashThemes
 Author URI: https://hashthemes.com
 Description: Square is a flexible responsive multipurpose theme compatible with all browsers and devices, fully mobile friendly, loaded with lots of features. It is a minimal theme based on WordPress Customizer that allows you to customize with live preview. The theme can be used for business, corporate, digital agency, personal, portfolio, photography, parallax, blogs and magazines. Square is eCommerce (WooCommerce) Compatible, Polylang Compatible, WPML, RTL, Retina Ready, SEO Friendly and Support bbPress and BuddyPress. More over it is a complete theme. For demo http://demo.hashthemes.com/square
-Version: 1.4.0
+Version: 1.4.3
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: square
@@ -733,8 +733,8 @@ a:active {
 	display: block;
 }
 
-.hentry {
-	margin: 0 0 30px;
+.sq-hentry {
+	margin: 0 0 50px;
 }
 
 .byline,
@@ -1282,7 +1282,7 @@ object {
 	right: 0;
 	z-index: 999;
 	font-family: "Roboto Condensed", sans-serif;
-	
+	height: 82px;
 	transition: all 0.6s ease-in-out;
 	-moz-transition: all 0.6s ease;
 	-webkit-transition: all 0.6s ease;
@@ -2022,14 +2022,15 @@ object {
 /*--------------------------------------------------------------
 ## Pagination CSS
 --------------------------------------------------------------*/
-.sq-pagination{
+.pagination{
 	text-align: center;
 	margin-bottom: 50px;
 	font-family: 'Roboto Condensed', sans-serif;
+	text-transform: uppercase;
 }
 
-.sq-pagination span,
-.sq-pagination a{
+.pagination span,
+.pagination a{
 	padding: 8px 10px;
 	border-bottom: 2px solid #555;
 	margin: 0 6px;
@@ -2038,8 +2039,8 @@ object {
 	color: #555;
 }
 
-.sq-pagination a:hover,
-.sq-pagination span{
+.pagination a:hover,
+.pagination span{
 	color: #5bc2ce;
 	border-bottom: 2px solid #5bc2ce;
 }

@@ -59,11 +59,11 @@
 		<div id="sq-bottom-footer">
 			<div class="sq-container sq-clearfix">
 				<div class="sq-site-info">
-
+					<?php printf( esc_html__( 'WordPress Theme', 'square' ) ); ?>
 					<span class="sep"> | </span>
 					<?php printf( 
 						/* translators: 1: link 2: Theme name */
-						esc_html__( '%1$s by %2$s', 'square' ), '<a target="_blank" href="http://hashthemes.com/wordpress-theme/square/">Square</a>', 'Hash Themes & hims'
+						esc_html__( '%1$s by %2$s', 'square' ), '<a target="_blank" href="http://hashthemes.com/wordpress-theme/square/">Square</a>', 'Hash Themes'
 					); ?>
 				</div>
 

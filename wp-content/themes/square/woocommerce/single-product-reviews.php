@@ -13,7 +13,7 @@
  * @see 	    https://docs.woocommerce.com/document/template-structure/
  * @author 		WooThemes
  * @package 	WooCommerce/Templates
- * @version     3.2.0
+ * @version     3.5.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -76,8 +76,8 @@ if ( ! comments_open() ) {
 						'title_reply_after'    => '</span>',
 						'comment_notes_after'  => '',
 						'fields'               => array(
-							'author' => '<div class="comment-form-author-email sq-clearfix"><p class="comment-form-author"><input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" aria-required="true" placeholder="'. esc_html__( 'Name*', 'square' ).'" required /></p>',
-							'email'  => '<p class="comment-form-email"><input id="email" name="email" type="email" value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30" aria-required="true" placeholder="'. esc_html__( 'Email*', 'square' ).'" required /></p></div>',
+							'author' => '<div class="comment-form-author-email sq-clearfix"><p class="comment-form-author"><input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" placeholder="'. esc_html__( 'Name*', 'square' ).'" required /></p>',
+							'email'  => '<p class="comment-form-email"><input id="email" name="email" type="email" value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30" placeholder="'. esc_html__( 'Email*', 'square' ).'" required /></p></div>',
 						),
 						'label_submit'  => esc_html__( 'Submit', 'square' ),
 						'logged_in_as'  => '',
@@ -92,7 +92,7 @@ if ( ! comments_open() ) {
 					}
 
 					if ( get_option( 'woocommerce_enable_review_rating' ) === 'yes' ) {
-						$comment_form['comment_field'] = '<div class="comment-form-rating"><label for="rating">' . esc_html__( 'Your rating', 'square' ) . '</label><select name="rating" id="rating" aria-required="true" required>
+						$comment_form['comment_field'] = '<div class="comment-form-rating"><label for="rating">' . esc_html__( 'Your rating', 'square' ) . '</label><select name="rating" id="rating" required>
 							<option value="">' . esc_html__( 'Rate&hellip;', 'square' ) . '</option>
 							<option value="5">' . esc_html__( 'Perfect', 'square' ) . '</option>
 							<option value="4">' . esc_html__( 'Good', 'square' ) . '</option>
@@ -102,7 +102,7 @@ if ( ! comments_open() ) {
 						</select></div>';
 					}
 
-					$comment_form['comment_field'] .= '<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" placeholder="'. esc_html__( 'Your Review', 'square' ) .'" required></textarea></p>';
+					$comment_form['comment_field'] .= '<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="8" placeholder="'. esc_html__( 'Your Review', 'square' ) .'" required></textarea></p>';
 
 					comment_form( apply_filters( 'woocommerce_product_review_comment_form_args', $comment_form ) );
 				?>

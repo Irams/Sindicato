@@ -7,7 +7,7 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('sq-hentry'); ?>>
 
 	<div class="entry-content single-entry-content">
 		<?php the_content(); ?>

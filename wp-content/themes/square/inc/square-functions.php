@@ -129,44 +129,6 @@ if(!function_exists('squareGetImageIdByUrl')){
 	}
 }
 
-if(!function_exists('kriesi_pagination')){
-	function kriesi_pagination($pages = '', $range = 2){  
-	     $showitems = ($range * 2)+1;  
-
-	     global $paged;
-	     if(empty($paged)) $paged = 1;
-
-	     if($pages == '')
-	     {
-	         global $wp_query;
-	         $pages = $wp_query->max_num_pages;
-	         if(!$pages)
-	         {
-	             $pages = 1;
-	         }
-	     }   
-
-	     if(1 != $pages)
-	     {
-	         echo "<div class='sq-pagination'>";
-	         if($paged > 2 && $paged > $range+1 && $showitems < $pages) echo "<a href='".get_pagenum_link(1)."'>&laquo;</a>";
-	         if($paged > 1 && $showitems < $pages) echo "<a href='".get_pagenum_link($paged - 1)."'>&lsaquo;</a>";
-
-	         for ($i=1; $i <= $pages; $i++)
-	         {
-	             if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems ))
-	             {
-	                 echo ($paged == $i)? "<span class='current'>".$i."</span>":"<a href='".get_pagenum_link($i)."' class='inactive' >".$i."</a>";
-	             }
-	         }
-
-	         if ($paged < $pages && $showitems < $pages) echo "<a href='".get_pagenum_link($paged + 1)."'>&rsaquo;</a>";  
-	         if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) echo "<a href='".get_pagenum_link($pages)."'>&raquo;</a>";
-	         echo "</div>\n";
-	     }
-	}
-}
-
 function square_dynamic_style(){
 	$square_page_header_bg = get_theme_mod( 'square_page_header_bg', get_template_directory_uri().'/images/bg.jpg');
 
@@ -176,6 +138,32 @@ function square_dynamic_style(){
 }
 
 add_action( 'wp_head', 'square_dynamic_style' );
+
+/**
+* Remove hentry from post_class
+*/
+add_filter( 'post_class', 'total_remove_hentry_class' );
+
+function total_remove_hentry_class( $classes ) {
+	if(is_singular(array('post','page'))){
+	    $classes = array_diff( $classes, array( 'hentry' ) );
+	}
+    return $classes;
+}
+
+
+add_filter( 'get_custom_logo', 'total_remove_itemprop' );
+
+function total_remove_itemprop(){
+	$custom_logo_id = get_theme_mod( 'custom_logo' );
+    $html = sprintf( '<a href="%1$s" class="custom-logo-link" rel="home">%2$s</a>',
+            esc_url( home_url( '/' ) ),
+            wp_get_attachment_image( $custom_logo_id, 'full', false, array(
+                'class'    => 'custom-logo',
+            ) )
+        );
+    return $html; 
+}
 
 if(!function_exists('square_font_awesome_icon_array')){
 	function square_font_awesome_icon_array(){

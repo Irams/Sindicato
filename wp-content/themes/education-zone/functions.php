@@ -191,10 +191,8 @@ function education_zone_scripts() {
 		);
     $build  = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '/build' : '';
     $suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-	wp_enqueue_style( 'font-awesome', get_template_directory_uri(). '/css' . $build . '/font-awesome' . $suffix . '.css' );
 	wp_enqueue_style( 'owl-carousel', get_template_directory_uri(). '/css' . $build . '/owl.carousel' . $suffix . '.css' );
     wp_enqueue_style( 'owl-theme-default', get_template_directory_uri(). '/css' . $build . '/owl.theme.default' . $suffix . '.css' );
-    wp_enqueue_style( 'jquery-sidr-light', get_template_directory_uri(). '/css' . $build . '/jquery.sidr.light' . $suffix . '.css' );    
     wp_enqueue_style( 'education-zone-google-fonts', add_query_arg( $query_args, "//fonts.googleapis.com/css" ) );
     wp_enqueue_style( 'education-zone-style', get_stylesheet_uri(), array(), EDUCATION_ZONE_THEME_VERSION );
     
@@ -202,9 +200,10 @@ function education_zone_scripts() {
     wp_enqueue_style( 'education-zone-woocommerce-style', get_template_directory_uri(). '/css' . $build . '/woocommerce' . $suffix . '.css', EDUCATION_ZONE_THEME_VERSION );
   
     wp_enqueue_script( 'owl-carousel', get_template_directory_uri() . '/js' . $build . '/owl.carousel' . $suffix . '.js', array('jquery'), '2.2.1', true );
-    wp_enqueue_script( 'jquery-sidr', get_template_directory_uri() . '/js' . $build . '/jquery.sidr' . $suffix . '.js', array('jquery'), '2.6.0', true );
 	wp_enqueue_script( 'waypoint', get_template_directory_uri() . '/js' . $build . '/waypoint' . $suffix . '.js', array('jquery'), '2.0.3', true );
 	wp_enqueue_script( 'jquery-counterup', get_template_directory_uri() . '/js' . $build . '/jquery.counterup' . $suffix . '.js', array('jquery', 'waypoint'), '1.0', true );
+	wp_enqueue_script( 'all', get_template_directory_uri() . '/js' . $build . '/all' . $suffix . '.js', array( 'jquery' ), '5.6.3', true );
+    wp_enqueue_script( 'v4-shims', get_template_directory_uri() . '/js' . $build . '/v4-shims' . $suffix . '.js', array( 'jquery' ), '5.6.3', true );
 	
 	wp_register_script( 'education-zone-custom', get_template_directory_uri() . '/js' . $build . '/custom' . $suffix . '.js', array('jquery'), EDUCATION_ZONE_THEME_VERSION, true );
     

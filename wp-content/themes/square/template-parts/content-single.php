@@ -7,7 +7,7 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('sq-hentry'); ?>>
 
 	<div class="entry-meta">
 		<?php square_posted_on(); ?>

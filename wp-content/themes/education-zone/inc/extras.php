@@ -453,7 +453,7 @@ function education_zone_get_sections(){
       );
     $enabled_section = array();
     foreach ( $sections as $section ) {
-        if ( esc_attr( get_theme_mod( 'education_zone_ed_' . $section['id'] . '_section' ) ) == 1 ){
+        if ( get_theme_mod( 'education_zone_ed_' . $section['id'] . '_section' ) == 1 ){
             $enabled_section[] = array(
                 'id'    => $section['id'],
                 'class' => $section['class']
@@ -478,12 +478,12 @@ function education_zone_sidebar_layout_class(){
     }
 }
 
-if ( ! function_exists( 'education_zone_excerpt_more' ) && ! is_admin() ) :
+if ( ! function_exists( 'education_zone_excerpt_more' ) ) :
 /**
  * Replaces "[...]" (appended to automatically generated excerpts) with ... * 
  */
-function education_zone_excerpt_more() {
-	return ' &hellip; ';
+function education_zone_excerpt_more($more) {
+	return is_admin() ? $more : ' &hellip; ';
 }
 add_filter( 'excerpt_more', 'education_zone_excerpt_more' );
 endif;

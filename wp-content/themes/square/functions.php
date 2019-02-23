@@ -175,7 +175,7 @@ function square_fonts_url() {
 	 * by Open Sans, translate this to 'off'. Do not translate into your own language.
 	 */
 	if ( 'off' !== _x( 'on', 'Open Sans font: on or off', 'square' ) ) {
-		$fonts[] = 'Open+Sans:400,300,600,700';
+		$fonts[] = 'Open Sans:400,300,600,700';
 	}
 
 	/*
@@ -183,7 +183,7 @@ function square_fonts_url() {
 	 * by Inconsolata, translate this to 'off'. Do not translate into your own language.
 	 */
 	if ( 'off' !== _x( 'on', 'Roboto Condensed font: on or off', 'square' ) ) {
-		$fonts[] = 'Roboto+Condensed:300italic,400italic,700italic,400,300,700';
+		$fonts[] = 'Roboto Condensed:300italic,400italic,700italic,400,300,700';
 	}
 
 	/*
@@ -204,8 +204,8 @@ function square_fonts_url() {
 
 	if ( $fonts ) {
 		$fonts_url = add_query_arg( array(
-			'family' =>  implode( '|', $fonts ) ,
-			'subset' =>  $subsets ,
+			'family' =>  urlencode( implode( '|', $fonts ) ) ,
+			'subset' =>  urlencode( $subsets ) ,
 		), '//fonts.googleapis.com/css' );
 	}
 

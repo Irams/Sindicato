@@ -25,10 +25,12 @@ class FrmEntriesListHelper extends FrmListHelper {
 			$join_form_in_query = true;
 		}
 
-		$s = self::get_param( array(
-			'param'    => 's',
-			'sanitize' => 'sanitize_text_field',
-		) );
+		$s = self::get_param(
+			array(
+				'param'    => 's',
+				'sanitize' => 'sanitize_text_field',
+			)
+		);
 
 		if ( $s != '' && FrmAppHelper::pro_is_installed() ) {
 			$fid = self::get_param( array( 'param' => 'fid' ) );
@@ -37,43 +39,53 @@ class FrmEntriesListHelper extends FrmListHelper {
 
 		$s_query = apply_filters( 'frm_entries_list_query', $s_query, compact( 'form_id' ) );
 
-		$orderby = self::get_param( array(
-			'param' => 'orderby',
-			'default' => 'id',
-		) );
+		$orderby = self::get_param(
+			array(
+				'param' => 'orderby',
+				'default' => 'id',
+			)
+		);
 
 		if ( strpos( $orderby, 'meta' ) !== false ) {
 			$order_field_type = FrmField::get_type( str_replace( 'meta_', '', $orderby ) );
 			$orderby .= in_array( $order_field_type, array( 'number', 'scale', 'star' ) ) ? '+0' : '';
 		}
 
-		$order = self::get_param( array(
-			'param'   => 'order',
-			'default' => 'DESC',
-		) );
+		$order = self::get_param(
+			array(
+				'param'   => 'order',
+				'default' => 'DESC',
+			)
+		);
 		$order = FrmDb::esc_order( $orderby . ' ' . $order );
 
 		$page = $this->get_pagenum();
-		$start = (int) self::get_param( array(
-			'param'   => 'start',
-			'default' => ( $page - 1 ) * $per_page,
-		) );
+		$start = (int) self::get_param(
+			array(
+				'param'   => 'start',
+				'default' => ( $page - 1 ) * $per_page,
+			)
+		);
 
 		$limit = FrmDb::esc_limit( $start . ',' . $per_page );
 		$this->items = FrmEntry::getAll( $s_query, $order, $limit, true, $join_form_in_query );
 		$total_items = FrmEntry::getRecordCount( $s_query );
 
-		$this->set_pagination_args( array(
-			'total_items' => $total_items,
-			'per_page' => $per_page,
-		) );
+		$this->set_pagination_args(
+			array(
+				'total_items' => $total_items,
+				'per_page' => $per_page,
+			)
+		);
 	}
 
 	public function no_items() {
-		$s = self::get_param( array(
-			'param' => 's',
-			'sanitize' => 'sanitize_text_field',
-		) );
+		$s = self::get_param(
+			array(
+				'param' => 's',
+				'sanitize' => 'sanitize_text_field',
+			)
+		);
 		if ( ! empty( $s ) ) {
 			esc_html_e( 'No Entries Found', 'formidable' );
             return;
@@ -99,7 +111,7 @@ class FrmEntriesListHelper extends FrmListHelper {
 		if ( $which == 'top' && empty( $form_id ) ) {
 			echo '<div class="alignleft actions">';
 			echo FrmFormsHelper::forms_dropdown( 'form', $form_id, array( 'blank' => __( 'View all forms', 'formidable' ) ) ); // WPCS: XSS ok.
-			submit_button( __( 'Filter' ), 'filter_action', '', false, array( 'id' => 'post-query-submit' ) );
+			submit_button( __( 'Filter', 'formidable' ), 'filter_action', '', false, array( 'id' => 'post-query-submit' ) );
 			echo '</div>';
 		}
 	}
@@ -209,7 +221,7 @@ class FrmEntriesListHelper extends FrmListHelper {
 				$val = '<abbr title="' . esc_attr( FrmAppHelper::get_formatted_time( $item->{$col_name}, '', 'g:i:s A' ) ) . '">' . $date . '</abbr>';
 				break;
 			case 'is_draft':
-				$val = empty( $item->is_draft ) ? esc_html__( 'No' ) : esc_html__( 'Yes' );
+				$val = empty( $item->is_draft ) ? esc_html__( 'No', 'formidable' ) : esc_html__( 'Yes', 'formidable' );
 				break;
 			case 'form_id':
 				$val = FrmFormsHelper::edit_form_link( $item->form_id );
@@ -242,7 +254,7 @@ class FrmEntriesListHelper extends FrmListHelper {
 
 		if ( current_user_can( 'frm_delete_entries' ) ) {
 			$delete_link = '?page=formidable-entries&frm_action=destroy&id=' . $item->id . '&form=' . $this->params['form'];
-			$actions['delete'] = '<a href="' . esc_url( wp_nonce_url( $delete_link ) ) . '" class="submitdelete" data-frmverify="' . esc_attr__( 'Are you sure?', 'formidable' ) . '">' . __( 'Delete' ) . '</a>';
+			$actions['delete'] = '<a href="' . esc_url( wp_nonce_url( $delete_link ) ) . '" class="submitdelete" data-frmverify="' . esc_attr__( 'Are you sure?', 'formidable' ) . '">' . __( 'Delete', 'formidable' ) . '</a>';
 	    }
 
 		$actions = apply_filters( 'frm_row_actions', $actions, $item );

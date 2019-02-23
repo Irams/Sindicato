@@ -17,6 +17,14 @@ class FrmFieldCheckbox extends FrmFieldType {
 	 */
 	protected $holds_email_values = true;
 
+	/**
+	 * Does the html for this field label need to include "for"?
+	 *
+	 * @var bool
+	 * @since 3.06.01
+	 */
+	protected $has_for_label = false;
+
 	protected function input_html() {
 		return $this->multiple_input_html();
 	}
@@ -33,10 +41,12 @@ class FrmFieldCheckbox extends FrmFieldType {
 
 	protected function new_field_settings() {
 		return array(
-			'options' => serialize( array(
-				__( 'Option 1', 'formidable' ),
-				__( 'Option 2', 'formidable' ),
-			) ),
+			'options' => serialize(
+				array(
+					__( 'Option 1', 'formidable' ),
+					__( 'Option 2', 'formidable' ),
+				)
+			),
 		);
 	}
 
